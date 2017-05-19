@@ -7,10 +7,9 @@ const User = require('../models/user.js');
 const sanitizer = require('sanitizer');
 
 router.post('/',(req,res)=>{
-console.log(req);
-  console.log(req.body.email);
+ 
+   
    const email = sanitizer.sanitize(req.body.email);
-   console.log(email);
    const name  = sanitizer.sanitize(req.body.name);
    const password = sanitizer.sanitize(req.body.password);
 
@@ -19,13 +18,16 @@ console.log(req);
 
    		if(err) throw err;
 
-		var user = new User({
+		
+   		console.log(user);
+   		if(user.length == 0){
+
+   			var user = new User({
 		   		email : email,
 		   		name : name,
 		   		password : password
 		   });
 
-   		if(user == null){
    			User.addUser(user,(err,user)=>{
    				if(err){
    					res.json({success:false,msg : "User Creation Failed"});
@@ -40,7 +42,16 @@ console.log(req);
    });
 
      
+});
 
+router.get('/',(req,res)=>{
+	User.getAllUsers((err, users)=>{
+		if(err){
+			throw err;
+		}else{
+			res.json({success:true, usersList : users });
+		}
+	});
 });
 
 

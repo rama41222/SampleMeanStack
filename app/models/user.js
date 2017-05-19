@@ -18,7 +18,7 @@ var UserSchema = mongoose.Schema({
 	}
 });
 
-const User = module.exports = mongoose.model('UserSchema',UserSchema);
+const User = module.exports = mongoose.model('User',UserSchema);
 
 module.exports.addUser = (newUser,callback)=>{
 	newUser.save(callback);
