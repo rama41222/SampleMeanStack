@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongooge = require('mongooge');
+const mongooge = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 mongooge.Promise = require('bluebird');
@@ -21,12 +21,18 @@ mongooge.connection.on('error', (err)=>{
 
 });
 
-app.use(path.join(__dirname + './public'));
-app.use(cors());
 
+
+
+app.use(express.static(path.join(__dirname + './public')));
+app.use(cors());
+app.use(bodyParser.json());
+
+const users = require("./app/routes/users.js");
+app.use('/users',users);
 
 app.get('/', (req,res)=>{
-	res.json({ "api": "Welcome to sample api 1.0.0v"});
+	res.json({ api: "Welcome to sample api 1.0.0v"});
 });
 
 app.listen(PORT, (err)=>{
