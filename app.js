@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongooge = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const passport = require('passport');
 mongooge.Promise = require('bluebird');
 const config = require('./app/config/database.js');
 
@@ -22,6 +23,10 @@ mongooge.connection.on('error', (err)=>{
 });
 
 
+//enable passport middlewate
+app.use(passport.initialize());
+app.use(passport.session());
+require('./app/config/passport')(passport);
 
 
 app.use(express.static(path.join(__dirname + './public')));

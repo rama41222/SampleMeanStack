@@ -44,6 +44,40 @@ router.post('/',(req,res)=>{
      
 });
 
+router.post('/authenticate',(req,res)=>{
+
+	const email = sanitizer.sanitize(req.body.email);
+	const password = sanitizer.sanitize(req.body.password);
+
+	User.getUserByEmail(email,(err,user)=>{
+		if(err) throw err;
+
+		if(user.email == ""){
+			res.json({success:false,msg : "User not found"});
+		}else{
+
+			User.comparePasswords(password,user.password,(err, isMatch)=>{
+				if(isMatch){
+					const token = jwt.sign(user,config.secret,{expiresIn:603400});
+
+			        res.json({
+			          success:true,
+			          token : 'JWT '+token,
+			          user : {
+			            id : user._id,
+			            name : user.name,
+			            email : user.email
+			          },
+			          mgs:"Login Success"});
+				}else{
+					res.json({success:false,msg : "Invalid password"});
+				}	
+			});
+		}
+	});
+
+
+});
 router.get('/',(req,res)=>{
 	User.getAllUsers((err, users)=>{
 		if(err){
