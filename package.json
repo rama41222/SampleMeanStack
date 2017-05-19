@@ -1,0 +1,36 @@
+{
+  "name": "sample-mean-stack",
+  "version": "1.0.0",
+  "description": "This is created for sample purposes only",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rama41222/SampleMeanStack.git"
+  },
+  "keywords": [
+    "mid",
+    "online",
+    "practice",
+    "meanstack",
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "rama41222",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rama41222/SampleMeanStack/issues"
+  },
+  "homepage": "https://github.com/rama41222/SampleMeanStack#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.0",
+    "passport": "^0.3.2"
+  }
+}
